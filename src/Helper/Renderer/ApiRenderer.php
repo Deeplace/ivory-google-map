@@ -161,7 +161,7 @@ class ApiRenderer extends AbstractRenderer
                 false
             ),
             $formatter->renderCall($initSourceCallback, [
-                $formatter->renderEscape($this->loaderRenderer->renderSource($loadCallback)),
+                $formatter->renderEscape($this->loaderRenderer->renderSource($initCallback, $libraries)),
             ], true),
         ], true, false);
     }

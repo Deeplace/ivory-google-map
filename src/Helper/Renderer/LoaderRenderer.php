@@ -123,11 +123,19 @@ class LoaderRenderer extends AbstractJsonRenderer
 
     /**
      * @param string $callback
+     * @param string[] $libraries
      *
      * @return string
      */
-    public function renderSource($callback)
+    public function renderSource($callback, array $libraries = [])
     {
-        return 'https://www.google.com/jsapi?callback='.$callback;
+        $parameters = ['language' => $this->language, 'callback' => $callback];
+        if ($this->hasKey()) {
+            $parameters['key'] = $this->key;
+        }
+        if (!empty($libraries)) {
+            $parameters['libraries'] = implode(',', $libraries);
+        }
+        return 'https://maps.googleapis.com/maps/api/js?' . http_build_query($parameters, '', '&');
     }
 }
